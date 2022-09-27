@@ -18,7 +18,7 @@ UPDATE_EVERY = 4        # how often to update the network
 
 device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
 
-class DQNAgent():
+class DoubleDQNAgent():
     """Interacts with and learns from the environment."""
 
     def __init__(self, state_size, action_size, seed, hidden_layers):
@@ -88,7 +88,8 @@ class DQNAgent():
         """
         states, actions, rewards, next_states, dones = experiences
 
-        max_q_values = self.qnetwork_target.forward(next_states).max(1)[0]
+        actions_local = self.qnetwork_local.forward(next_states).argmax(1)
+        max_q_values = self.qnetwork_target.forward(next_states)[np.arange(actions_local.shape[0]), actions_local]
         td_target = rewards.squeeze()+gamma*max_q_values*(1-dones.squeeze())
 
         predicted_q_values = self.qnetwork_local.forward(states)
