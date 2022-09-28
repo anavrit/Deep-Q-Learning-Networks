@@ -18,7 +18,7 @@ action_size = brain.vector_action_space_size
 state = env_info.vector_observations[0]
 state_size = len(state)
 
-def train_agent(filename, num_episodes = 2000, max_iter = 1000, epsilon_start = 1.0, epsilon_decay = 0.995, epsilon_min = 0.01):
+def train_agent(agent, filename, num_episodes = 2000, max_iter = 1000, epsilon_start = 1.0, epsilon_decay = 0.995, epsilon_min = 0.01):
     scores = []
     scores_window = deque(maxlen=100)
     epsilon = epsilon_start
@@ -51,8 +51,10 @@ def train_agent(filename, num_episodes = 2000, max_iter = 1000, epsilon_start = 
                 best_mean_score = mean_score
     return scores
 
+architectures = [[64, 64], [128, 64], [64, 64, 64], [128, 64, 32], [256, 128, 64, 32]]
+agent_scores = []
 agent = DoubleDQNAgent(state_size=state_size, action_size=action_size, seed=0, hidden_layers=[64, 64, 64])
-scores = train_agent('../Trained_Weights/doubledqn_trained_weights_64x64x64_.pth')
+scores = train_agent(agent, filename='../Trained_Weights/doubledqn_trained_weights_64x64x64_.pth')
 
 fig = plt.figure()
 ax = fig.add_subplot(111)
