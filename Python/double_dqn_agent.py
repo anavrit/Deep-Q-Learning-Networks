@@ -21,7 +21,7 @@ device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
 class DoubleDQNAgent():
     """Interacts with and learns from the environment."""
 
-    def __init__(self, state_size, action_size, seed, hidden_layers):
+    def __init__(self, state_size, action_size, seed, hidden_layers=[64, 64]):
         """Initialize an Agent object.
 
         Params
