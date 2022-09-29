@@ -1,9 +1,11 @@
 from unityagents import UnityEnvironment
 from double_dqn_agent import DoubleDQNAgent
+from dqn_agent import DQNAgent
 
 import torch
 from collections import namedtuple, deque
 import numpy as np
+import pandas as pd
 import matplotlib.pyplot as plt
 
 env = UnityEnvironment(file_name="../Banana.app")
@@ -52,10 +54,21 @@ def train_agent(agent, filename, num_episodes = 2000, max_iter = 1000, epsilon_s
     return scores
 
 architectures = [[64, 64], [128, 64], [64, 64, 64], [128, 64, 32], [256, 128, 64, 32]]
-agent_scores = []
-agent = DoubleDQNAgent(state_size=state_size, action_size=action_size, seed=0, hidden_layers=[64, 64, 64])
-scores = train_agent(agent, filename='../Trained_Weights/doubledqn_trained_weights_64x64x64_.pth')
+doubledqn_agent_scores = []
+dqn_agent_scores = []
+column_names = ['64x64', '128x64', '64x64x64', '128x64x32', '256x128x64x32']
+for i, hidden_layers in enumerate(architectures):
+    dqn_agent = DQNAgent(state_size=state_size, action_size=action_size, seed=0, hidden_layers=hidden_layers)
+    dqn_agent_scores.append(train_agent(dqn_agent, filename=f'../Trained_Weights/dqn_trained_weights_{column_names[i]}_.pth'))
+    double_dqn_agent = DoubleDQNAgent(state_size=state_size, action_size=action_size, seed=0, hidden_layers=hidden_layers)
+    doubledqn_agent_scores.append(train_agent(double_dqn_agent, filename=f'../Trained_Weights/double_dqn_trained_weights_{column_names[i]}_.pth'))
 
+dqn = pd.DataFrame({col: dqn_agent_scores[i] for i, col in enumerate(column_names)})
+dqn.to_csv('../Scores/dqn_scores.csv', index=False)
+doubledqn = pd.DataFrame({col: doubledqn_agent_scores[i] for i, col in enumerate(column_names)})
+doubledqn.to_csv('../Scores/doubledqn_scores.csv', index=False)
+
+"""
 fig = plt.figure()
 ax = fig.add_subplot(111)
 plt.plot(np.arange(len(scores)), scores)
@@ -63,5 +76,6 @@ plt.ylabel('Score')
 plt.xlabel('Episode #')
 plt.title('Training a DoubleDQN Agent')
 plt.savefig('../Charts/doubledqn.png', transparent=True)
+"""
 
 env.close()
