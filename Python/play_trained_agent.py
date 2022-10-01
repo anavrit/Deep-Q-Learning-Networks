@@ -11,10 +11,10 @@ env_info = env.reset(train_mode=False)[brain_name]
 action_size = brain.vector_action_space_size
 state_size = brain.vector_observation_space_size
 
-agent = DoubleDQNAgent(state_size=state_size, action_size=action_size, seed=0, hidden_layers=[64, 64, 64])
+agent = DoubleDQNAgent(state_size=state_size, action_size=action_size, seed=0, hidden_layers=[256, 128, 64, 32])
 
 # Load trained weights
-trained_weights = torch.load('../Trained_Weights/doubledqn_trained_weights_64x64x64_.pth')
+trained_weights = torch.load('../Trained_Weights/doubledqn_trained_weights_256x128x64x32_.pth')
 agent.qnetwork_local.load_state_dict(trained_weights)
 agent.qnetwork_target.load_state_dict(trained_weights)
 
