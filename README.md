@@ -6,7 +6,7 @@
 
 ### Project Details
 
-For this project, I trained an agent to navigate and collect bananas in a large, square world.  The code is written in PyTorch and Python 3.6. I trained the agent on a iMac Pro (2017) with a 3.2 GHz 8-Core Intel Xeon W including 64 GB RAM. I did not use the GPU for training as it is not CUDA compatible.
+For this project, I trained an agent to navigate and collect bananas in a large, square world.  The code is written in PyTorch and Python 3.6. I trained the agent on an iMac Pro (2017) with a 3.2 GHz 8-Core Intel Xeon W including 64 GB RAM. I did not use the GPU for training as it is not CUDA compatible.
 
 ![Trained Agent][image1]
 
@@ -34,7 +34,9 @@ The task is episodic, and in order to solve the environment, your agent must get
 
 2. Install OpenAI gym in the environment:
 
-  `pip install gym`
+  `pip install gym` <br>
+  `pip install 'gym[classic_control]'` <br>
+  `pip install 'gym[box2d]'`
 
 3. Clone the following repository and install the additional dependencies:
 
@@ -67,7 +69,7 @@ A brief description of files in the `Python` folder: <br>
 
 #### Train agent <br>
 
-**Note:** You may have to enable firewall access to Banana.app on MacOS. Instructions are [here](https://support.apple.com/guide/mac-help/block-connections-to-your-mac-with-a-firewall-mh34041/mac).
+**Note:** For MacOS users you may have to enable firewall access to Banana.app and give access to the app through Security & Privacy settings. Instructions are [here](https://support.apple.com/guide/mac-help/block-connections-to-your-mac-with-a-firewall-mh34041/mac).
 
 1. Navigate to the Python directory
 
