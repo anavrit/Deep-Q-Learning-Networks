@@ -26,7 +26,7 @@ The task is episodic, and in order to solve the environment, your agent must get
 
   **Linux or Mac:**<br>
   `conda create --name drlnd python=3.6` <br>
-  `source activate drlnd`
+  `conda activate drlnd`
 
   **Windows:**<br>
   `conda create --name drlnd python=3.6`<br>
@@ -40,7 +40,7 @@ The task is episodic, and in order to solve the environment, your agent must get
 
   `git clone https://github.com/anavrit/Deep-Q-Learning-Networks.git`<br>
   `cd Deep-Q-Learning-Networks`<br>
-  `pip install .`
+  `pip install -r requirements.txt`
 
 4. Download the environment from one of the links below.  You need only select the environment that matches your operating system:
     - Linux: [click here](https://s3-us-west-1.amazonaws.com/udacity-drlnd/P1/Banana/Banana_Linux.zip)
@@ -67,6 +67,8 @@ A brief description of files in the `Python` folder: <br>
 
 #### Train agent <br>
 
+**Note:** You may have to enable firewall access to Banana.app on MacOS. Instructions are [here](https://support.apple.com/guide/mac-help/block-connections-to-your-mac-with-a-firewall-mh34041/mac).
+
 1. Navigate to the Python directory
 
   `cd Python`
@@ -75,11 +77,12 @@ A brief description of files in the `Python` folder: <br>
 
   `python train_and_play_agent.py`<br>
 
-  User will be given an option for showing how well the agent plays the game.
+  Option will be provided for user to see the trained agent play.
 
 #### Resources <br>
 
 The following key resources can be found in the `Resources` folder:
 
 1. `double_dqn_trained_weights_256x128x64x32_.pth`: trained weights of the best Q network
-2. `My_Trained_Agent`: tracking progress of the trained agent
+
+2. `My_Trained_Agent.jpg`: graph tracking progress of the trained agent
