@@ -4,9 +4,9 @@
 
 # Project 1: Navigation
 
-### Introduction
+### Project Details
 
-For this project, you will train an agent to navigate (and collect bananas!) in a large, square world.  
+For this project, I trained an agent to navigate and collect bananas in a large, square world.  The code is written in PyTorch and Python 3.6. I trained the agent on a iMac Pro (2017) with a 3.2 GHz 8-Core Intel Xeon W including 64 GB RAM. I did not use the GPU for training as it is not CUDA compatible.
 
 ![Trained Agent][image1]
 
@@ -22,34 +22,64 @@ The task is episodic, and in order to solve the environment, your agent must get
 
 ### Getting Started
 
-1. Download the environment from one of the links below.  You need only select the environment that matches your operating system:
+1. Create and activate a new environment with Python 3.6
+
+  **Linux or Mac:**<br>
+  `conda create --name drlnd python=3.6` <br>
+  `source activate drlnd`
+
+  **Windows:**<br>
+  `conda create --name drlnd python=3.6`<br>
+  `activate drlnd`    
+
+2. Install OpenAI gym in the environment:
+
+  `pip install gym`
+
+3. Clone the following repository and install the additional dependencies:
+
+  `git clone https://github.com/anavrit/Deep-Q-Learning-Networks.git`<br>
+  `cd Deep-Q-Learning-Networks`<br>
+  `pip install .`
+
+4. Download the environment from one of the links below.  You need only select the environment that matches your operating system:
     - Linux: [click here](https://s3-us-west-1.amazonaws.com/udacity-drlnd/P1/Banana/Banana_Linux.zip)
     - Mac OSX: [click here](https://s3-us-west-1.amazonaws.com/udacity-drlnd/P1/Banana/Banana.app.zip)
     - Windows (32-bit): [click here](https://s3-us-west-1.amazonaws.com/udacity-drlnd/P1/Banana/Banana_Windows_x86.zip)
     - Windows (64-bit): [click here](https://s3-us-west-1.amazonaws.com/udacity-drlnd/P1/Banana/Banana_Windows_x86_64.zip)
-    
+
     (_For Windows users_) Check out [this link](https://support.microsoft.com/en-us/help/827218/how-to-determine-whether-a-computer-is-running-a-32-bit-version-or-64) if you need help with determining if your computer is running a 32-bit version or 64-bit version of the Windows operating system.
 
     (_For AWS_) If you'd like to train the agent on AWS (and have not [enabled a virtual screen](https://github.com/Unity-Technologies/ml-agents/blob/master/docs/Training-on-Amazon-Web-Service.md)), then please use [this link](https://s3-us-west-1.amazonaws.com/udacity-drlnd/P1/Banana/Banana_Linux_NoVis.zip) to obtain the environment.
 
-2. Place the file in the DRLND GitHub repository, in the `p1_navigation/` folder, and unzip (or decompress) the file. 
+5. Move or copy the downloaded environment to the root directory of Deep-Q-Learning-Networks; and unzip the file to get `Banana.app`.
 
 ### Instructions
 
-Follow the instructions in `Navigation.ipynb` to get started with training your own agent!  
+A brief description of files in the `Python` folder: <br>
+- `dqn_agent.py`: defines a DQN agent
+- `double_dqn_agent.py`: defines a Double DQN agent
+- `replaybuffer.py`: class that buffers the experiences for both agents
+- `model.py`: deep neural network model architecture
+- `train_agent.py`: code used to train DQN and Double DQN agents over multiple architectures
+- `charts.py`: code for charts showing results from `train_agent.py`
+- `train_and_play_agent.py`: code for user to train and optionally play the trained agent.
 
-### (Optional) Challenge: Learning from Pixels
+#### Train agent <br>
 
-After you have successfully completed the project, if you're looking for an additional challenge, you have come to the right place!  In the project, your agent learned from information such as its velocity, along with ray-based perception of objects around its forward direction.  A more challenging task would be to learn directly from pixels!
+1. Navigate to the Python directory
 
-To solve this harder task, you'll need to download a new Unity environment.  This environment is almost identical to the project environment, where the only difference is that the state is an 84 x 84 RGB image, corresponding to the agent's first-person view.  (**Note**: Udacity students should not submit a project with this new environment.)
+  `cd Python`
 
-You need only select the environment that matches your operating system:
-- Linux: [click here](https://s3-us-west-1.amazonaws.com/udacity-drlnd/P1/Banana/VisualBanana_Linux.zip)
-- Mac OSX: [click here](https://s3-us-west-1.amazonaws.com/udacity-drlnd/P1/Banana/VisualBanana.app.zip)
-- Windows (32-bit): [click here](https://s3-us-west-1.amazonaws.com/udacity-drlnd/P1/Banana/VisualBanana_Windows_x86.zip)
-- Windows (64-bit): [click here](https://s3-us-west-1.amazonaws.com/udacity-drlnd/P1/Banana/VisualBanana_Windows_x86_64.zip)
+2. Train agent with the following command:
 
-Then, place the file in the `p1_navigation/` folder in the DRLND GitHub repository, and unzip (or decompress) the file.  Next, open `Navigation_Pixels.ipynb` and follow the instructions to learn how to use the Python API to control the agent.
+  `python train_and_play_agent.py`<br>
 
-(_For AWS_) If you'd like to train the agent on AWS, you must follow the instructions to [set up X Server](https://github.com/Unity-Technologies/ml-agents/blob/master/docs/Training-on-Amazon-Web-Service.md), and then download the environment for the **Linux** operating system above.
+  User will be given an option for showing how well the agent plays the game.
+
+#### Resources <br>
+
+The following key resources can be found in the `Resources` folder:
+
+1. `double_dqn_trained_weights_256x128x64x32_.pth`: trained weights of the best Q network
+2. `My_Trained_Agent`: tracking progress of the trained agent

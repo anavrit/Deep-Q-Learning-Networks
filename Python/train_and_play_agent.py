@@ -19,7 +19,7 @@ action_size = brain.vector_action_space_size
 state = env_info.vector_observations[0]
 state_size = len(state)
 
-def train_agent(agent, filename, num_episodes = 2000, max_iter = 1000, epsilon_start = 1.0, epsilon_decay = 0.995, epsilon_min = 0.01):
+def train_agent(agent, filename, num_episodes = 2000, max_iter = 300, epsilon_start = 1.0, epsilon_decay = 0.995, epsilon_min = 0.01):
     scores = []
     scores_window = deque(maxlen=100)
     epsilon = epsilon_start
@@ -72,7 +72,7 @@ plt.savefig('../Resources/My_Trained_Agent.jpg', bbox_inches='tight')
 # Game play
 play = input('Would you like to play the trained agent (Y/N)? ')
 
-if play in ["y", "Y"]:
+while play in ["y", "Y"]:
     trained_weights = torch.load(filename)
     agent.qnetwork_local.load_state_dict(trained_weights)
     agent.qnetwork_target.load_state_dict(trained_weights)
@@ -91,5 +91,8 @@ if play in ["y", "Y"]:
         if done:
             break
     print('Score =', score)
+    play = input('Play again (Y/N)? ')
+    if play not in ["y", "Y"]:
+        break
 
 env.close()

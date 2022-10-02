@@ -11,7 +11,7 @@ For this project, I have trained an agent to navigate and collect bananas in a l
 ![Trained Agent][image1]
 
 #### 1. Deep Q-Network (DQN)
-The [Deep Q-Network] (https://storage.googleapis.com/deepmind-media/dqn/DQNNaturePaper.pdf) was introduced by Mnih et al. in a 2015 paper titled 'Human-level control through deep reinforcement learning' in Nature. As in Markov Decision Processes (MDPs) the goal of the agent is to interact with the environment by selecting actions in a way that maximizes future rewards. At each time-step the agent selects an action from the set of legal game actions and receives a future state and reward from the environment. Using Q-learning with a deep neural network as a nonlinear function approximator, the following modifications are made: (a) *Experience replay* that stores experiences and randomizes over the data, thereby removing correlations in the observation sequence and smoothing over changes in the data distribution; and (b) *Iterative updates* that adjusts the action-values towards target values that are only periodically updated, thereby reducing correlations with the target.
+The [Deep Q-Network] (https://storage.googleapis.com/deepmind-media/dqn/DQNNaturePaper.pdf) was introduced by Mnih et al. in a 2015 paper titled 'Human-level control through deep reinforcement learning' in Nature. As in Markov Decision Processes (MDPs) the goal of the agent is to interact with the environment by selecting actions in a way that maximizes future discounted rewards. At each time-step the agent selects an action from the set of legal game actions and receives a future state and reward from the environment. Using Q-learning with a deep neural network as a nonlinear function approximator, the following modifications are made: (a) *Experience replay* that stores experiences and randomizes over the data, thereby removing correlations in the observation sequence and smoothing over changes in the data distribution; and (b) *Iterative updates* that adjusts the action-values towards target values that are only periodically updated, thereby reducing correlations with the target.
 
 The algorithm in full is shown below:
 
@@ -24,7 +24,9 @@ Y<sub>t</sub><sup>DoubleDQN</sup> = R<sub>t+1</sub> + γQ(S<sub>t+1</sub>, argma
 
 **Network Architecture**
 
-The input to the network is equivalent to the state size of the game. The final network architecture selected, after testing five different architectures (see Plot of Rewards), is a double DQN with four fully-connected hidden layers of 256, 128, 64 and 32 units, in sequence. All these layers are separated by Rectifier Linear Units (ReLu). Finally, a fully-connected linear layer projects to the output of the network, i.e., the Q-values for each of the four actions. The optimization employed to train the network is Adam.
+The input to the network is equivalent to the state size of the game. The final network architecture selected, after testing five different architectures (see Plot of Rewards), is a double DQN with four fully-connected hidden layers of 256, 128, 64 and 32 units, in sequence. All these layers are separated by Rectifier Linear Units (ReLu). Finally, a fully-connected linear layer projects to the output of the network, i.e., the Q-values for each of the four actions. The optimization employed to train the network is Adam. Training is stopped at 1200 episodes after which further performance improvements were not observed.
+
+The trained weights are available in `/Resources/double_dqn_trained_weights_256x128x64x32_.pth`.
 
 **Hyper-parameters**
 

@@ -20,7 +20,7 @@ action_size = brain.vector_action_space_size
 state = env_info.vector_observations[0]
 state_size = len(state)
 
-def train_agent(agent, filename, num_episodes = 2000, max_iter = 1000, epsilon_start = 1.0, epsilon_decay = 0.995, epsilon_min = 0.01):
+def train_agent(agent, filename, num_episodes = 2000, max_iter = 300, epsilon_start = 1.0, epsilon_decay = 0.995, epsilon_min = 0.01):
     scores = []
     scores_window = deque(maxlen=100)
     epsilon = epsilon_start
